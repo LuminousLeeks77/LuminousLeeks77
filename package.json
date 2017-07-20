@@ -7,6 +7,7 @@
     "start": "node server/index.js",
     "server-dev": "nodemon server",
     "test": "NODE_ENV=test grunt test",
+    "heroku-postbuild": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "build": "webpack --watch"
   },
   "author": "Hack Reactor",
@@ -38,6 +39,7 @@
     "ioredis": "^3.1.1",
     "knex": "^0.12.9",
     "mocha": "^3.2.0",
+    "moment": "^2.18.1",
     "morgan": "^1.8.1",
     "node": "^0.0.0",
     "node-mocks-http": "^1.6.1",
