@@ -6,6 +6,7 @@ import { CloseQueueButton } from '../components/CloseQueueButton.jsx';
 import { OpenQueueButton } from '../components/OpenQueueButton.jsx';
 import mapStyles from '../styles/mapStyles.js';
 import { colors } from '../colors/colors.jsx';
+import { Button } from 'react-bootstrap';
 
 export class QueueChoiceMap extends React.Component {
 
@@ -16,8 +17,6 @@ export class QueueChoiceMap extends React.Component {
       activeMarker: {},
       selectedPlace: {}
     };
-    this.onMarkerClick = this.onMarkerClick.bind(this);
-    this.onMapClicked = this.onMapClicked.bind(this);
   }
 
   onMarkerClick(props, marker, e) {
@@ -80,13 +79,14 @@ export class QueueChoiceMap extends React.Component {
             zoomControl={false}
             scaleControl={true}
             disableDoubleClickZoom={true}
+            clickableIcons={true}
             className="map"
             defaultCenter={{lat: -33, lng: 151}}
           >
 
             { this.props.redux.store.queueChoice.queueList.map(queue => {
               return <Marker
-                onClick={this.onMarkerClick}
+                onClick={this.onMarkerClick.bind(this)}
                 key={queue.id}
                 title={queue.name}
                 name={queue.name}
@@ -127,5 +127,5 @@ QueueChoiceMap.defaultProps = { mapStyles: mapStyles };
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo',
-  version: '3.27'
+  version: '3.27',
 })(QueueChoiceMap);
